@@ -1,0 +1,21 @@
+input_dir: /Users/ezajlerg/datasets/third_party/adhoc40-test
+dataset_dir: /Users/ezajlerg/datasets/neural_srp/test_libri_3120 # Output dir
+
+mode: all
+n_phrases_per_positioning: 1 # Number of phrases to select per loudspeaker and microphones combination
+signal_duration_in_seconds: 1
+mic_sr_offsets: [0, 0] #[-2, 2] microphones 1 and 2 will have an offset of this number of samples
+mic_delay_range: [0.0, 0.0]
+mic_gain_range: [1, 1]
+n_mics: 6
+microphone_groups: null # [ # If this variable is set, one microphone from each group will be selected for each dataset sample
+#     [40, 32, 24, 16],
+#     [8, 7, 6, 5, 4, 3, 2],
+#     [1, 9, 17, 25],
+#     [39, 38, 37, 36, 35, 34, 33]
+# ]
+random_seed: 0
+n_jobs: 10 # Number of parallel jobs. Suggestion: set to number of cores in the machine
+# TODO: Add margin to place sources and microphones away from the walls
+
+n_samples: null
