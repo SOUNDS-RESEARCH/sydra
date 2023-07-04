@@ -5,13 +5,37 @@ This project provides functionality for generating synthetic room acoustic datas
 ## Functionality
 So far, Sydra is only able to generate datasets containing multiple microphones and sources. The parameters of these microphones may be either fixed or random, as well as the room dimensions and reverberation time (rt60). The input source signal may either be noise, or a directory containing signal samples (such as speech) may be provided.
 
-We provide a SydraDataset class, a Pytorch Dataset, which allows you to easily load and train models using Pytorch and Pytorch Lightning.
+We provide a SydraDataset class, a Pytorch Dataset, which allows you to easily load and train models using Pytorch.
 
 
-## Dependencies
+## Installation
+We recommend creating a virutal environment for this project.
+If you are using Anaconda, this can be achieved by running the following command:
 
-Pyroomasync: A wrapper on top of [Pyroomacoustics](https://github.com/LCAV/pyroomacoustics/) which facilitates generating behaviour
+`conda create -n sydra`
+
+Then, activate the environment:
+
+`conda activate sydra`
+
+Then, install the requirements:
+
+`pip install -r requirements.txt`
+
+Finally, clone the package:
+
+`git clone https://github.com/SOUNDS-RESEARCH/sydra --recurse-submodules`
+
+
+The `--recurse-submodules` flag is necessary to clone the Pyroomasync submodule, a wrapper on top of [Pyroomacoustics](https://github.com/LCAV/pyroomacoustics/) which facilitates generating behaviour
 common to WASNs (Microphones with different sampling rates, gains, delay).
+
+## Usage
+You can configure your simulation in the `config/config.yaml` file. Most parameters in the config file have an inline comment describing it. Then, you can create a dataset by running:
+
+`python main.py dataset_dir=/path/to/dataset n_samples=1000`,
+
+where `dataset_dir` is the directory where the dataset will be saved, and `n_samples` is the number of samples to generate.
 
 ## Format
 

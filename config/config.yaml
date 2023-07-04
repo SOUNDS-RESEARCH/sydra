@@ -2,10 +2,10 @@ dataset_dir: ???
 n_samples: ???
 
 mics:
-  n_mics: 4
+  n_mics: 1
   mic_coordinates: null
-  mic_type: single # single | circular | benchmark ... (see mic_array_geometries.py for all available)
-  n_array: 1 # Only used when mic_type != single
+  mic_type: circular # single | circular | benchmark ... (see mic_array_geometries.py for all available)
+  n_array: 2 # Only used when mic_type != single
   radius_in_meters: [0.02, 0.07] #0.045 # Used when mic_type == "circular"
   phi: [0, 6.28] # Used when mic_type == "circular". Angle the first microphone in the array makes with the x axis, in radians
   mic_delay_ranges: null
@@ -18,7 +18,7 @@ mics:
 sources:
   source_coordinates: null # source coordinates will be generated randomly, or a vector of three floats may be provided as a fixed position.
   speech_signals_dir: /Users/ezajlerg/datasets/third_party/vctk/no_silence
-  n_sources: 1
+  n_sources: 2
   moving: False
   n_trajectory_points: 156
 
@@ -32,7 +32,7 @@ use_reflectivity_biased_sampling: True # If "reflectivity_biased_sampling",
                                               # the absorption coeffs. of the surfaces will be generated
                                               # as described in https://asa.scitation.org/doi/10.1121/10.0005888.
                                               # To use a fixed rt60 range, this must be set to null
-anechoic: False
+anechoic: True
 rt60: [0.2, 0.6] # reverberation time range in seconds. If room_surfaces is provided, this is not used.
 
 # Misc config

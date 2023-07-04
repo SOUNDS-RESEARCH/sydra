@@ -1,10 +1,8 @@
-import sys
-
 from pyroomacoustics import Material
 
 from ..random.surface_absorptions import SURFACE_NAMES, SURFACE_ABSORPTIONS
 
-from .pyroomasync.pyroomasync import ConnectedShoeBox, simulate
+from pyroomasync import ConnectedShoeBox, simulate
 
 
 def pyroomacoustics_simulator(config):

@@ -1,1 +1,0 @@
-Credits to David Díaz-Guerra.
