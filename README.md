@@ -12,7 +12,7 @@ We provide a SydraDataset class, a Pytorch Dataset, which allows you to easily l
 We recommend creating a virutal environment for this project.
 If you are using Anaconda, this can be achieved by running the following command:
 
-`conda create -n sydra`
+`conda create -n sydra python=3.8`
 
 Then, activate the environment:
 

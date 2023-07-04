@@ -6,3 +6,4 @@ pyroomacoustics
 torch
 torchaudio
 tqdm
+webrtcvad

@@ -1,0 +1,3 @@
+[submodule "sydra/simulators/pyroomasync"]
+	path = sydra/simulators/pyroomasync
+	url = https://github.com/sounds-research/pyroomasync
