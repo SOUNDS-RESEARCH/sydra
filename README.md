@@ -3,7 +3,7 @@
 This project provides functionality for generating synthetic room acoustic datasets, which can be used for training and evaluating machine learning models. Furthermore, we take interest in asynchronous microphone networks, which may be also sometimes referred to as Wireless Acoustic Sensor Networks (WASNs). Every dataset sample is generated in two steps, firstly by simulating the acoustic propagation from the sound sources to all the microphones present in the room, and later by simulating the network propagation and microphone characteristics through the use of fractional delay filtering.
 
 ## Functionality
-So far, Sydra is only able to generate datasets containing multiple microphones and one source. The parameters of these microphones may be either fixed or random, as well as the room dimensions and reverberation time (rt60). The input source signal may either be noise, or a directory containing signal samples (such as speech) may be provided.
+So far, Sydra is only able to generate datasets containing multiple microphones and sources. The parameters of these microphones may be either fixed or random, as well as the room dimensions and reverberation time (rt60). The input source signal may either be noise, or a directory containing signal samples (such as speech) may be provided.
 
 We provide a SydraDataset class, a Pytorch Dataset, which allows you to easily load and train models using Pytorch and Pytorch Lightning.
 
