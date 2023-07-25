@@ -150,8 +150,8 @@ def _generate_random_source_signals(base_config, mic_delays):
 
     for i in range(base_config["sources"]["n_sources"]):
         if "speech_samples" in base_config["sources"]:
-            source_signal = generate_random_speech_signal(total_duration, sr,
-                                                        base_config["speech_samples"])
+            source_signal = generate_random_speech_signal(
+                total_duration, sr, base_config["sources"]["speech_samples"])
         else:
             source_signal, gain = generate_random_signal(int(sr*total_duration))
 

@@ -81,6 +81,8 @@ def generate_sample(base_config=None, output_dir=None, random=True):
     if base_config is None:
         base_config = load_config()
 
+
+
     # 1. If provided config contain ranges, generate random coordinates, room dims, etc.
     config = base_config
     if random:
@@ -160,7 +162,7 @@ def _create_speech_config(dataset_config):
             return_vad=True)
     else:
         path = Path(dataset_config["sources"]["speech_signals_dir"])
-        dataset_config["speech_samples"] = [
+        dataset_config["sources"]["speech_samples"] = [
             str(p) for p in path.rglob("*.wav")
         ]
 
