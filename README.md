@@ -43,6 +43,7 @@ Every SydraDataset contains a `metadata.[csv|json|yaml]` file in its root, which
 A SydraDataset also contains a `samples/` directory, which in turn contains many directories. Every one of such directories contains the recordings referring to each microphone.
 
 ### Authors
+
 * Eric Grinstein
 * Derin Ak
 * Prof. Patrick A. Naylor
