@@ -5,13 +5,13 @@ from omegaconf import ListConfig
 from pyroomacoustics.beamforming import circular_2D_array
 
 
-def generate_mic_and_source_coords(room_dims, mic_config,
+def generate_mic_and_source_coords(room_dims, n_sources, mic_config,
                                    base_source_coordinates,
-                                   n_sources,
                                    n_interferers,
                                    min_wall_distance,
                                    min_mic_source_dist,
                                    default_device_height):
+
 
     if mic_config["mic_type"] == "circular":
         # Increase margins to the radius of the arrays
@@ -47,19 +47,19 @@ def generate_mic_and_source_coords(room_dims, mic_config,
                     room_dims, n_interferers, min_wall_distance,
                     default_height=default_device_height)
 
+        all_points = np.array(mic_coordinates)
+        if source_coordinates:
+            all_points = np.concatenate([all_points, source_coordinates])
+        
         # 2. Verify if they are the required distance apart
-        all_points = np.concatenate([
-            np.array(mic_coordinates),
-            np.array(source_coordinates)
-        ])
         if interferer_coordinates:
             all_points = np.concatenate([
                 all_points, np.array(interferer_coordinates)
             ])
-
-        min_dist = _min_dist(all_points)
-        if min_dist < min_mic_source_dist:
-            continue
+        if(len(all_points) > 1):
+            min_dist = _min_dist(all_points)
+            if min_dist < min_mic_source_dist:
+                continue
         
         # 3. Expand individual points into microphone arrays 
         array_centres = mic_coordinates

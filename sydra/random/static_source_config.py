@@ -13,6 +13,8 @@ from .surface_absorptions import generate_random_surface_absorption
 def generate_random_config_for_static_source(base_config):
     """Generate a random configuration for a static source scenario
     """
+    # Generate random number of sources
+    n_sources=random.choice(range(base_config["sources"]["n_sources"][0], base_config["sources"]["n_sources"][1]))
 
     source_coordinates = base_config["sources"]["source_coordinates"]
 
@@ -25,9 +27,9 @@ def generate_random_config_for_static_source(base_config):
      source_coordinates,
      interferer_coordinates) = generate_mic_and_source_coords(
                 room_dims,
+                n_sources,
                 base_config["mics"],
                 base_config["sources"]["source_coordinates"],
-                base_config["sources"]["n_sources"],
                 base_config["n_interferers"],
                 base_config["min_wall_distance"],
                 base_config["min_mic_source_dist"],
@@ -39,7 +41,7 @@ def generate_random_config_for_static_source(base_config):
         generate_random_microphone_signal_degradations(base_config["mics"])
 
     # 4. Generate random source signals
-    source_signals = _generate_random_source_signals(base_config, mic_delays)
+    source_signals = _generate_random_source_signals(n_sources, base_config, mic_delays)
 
     # 5. Generate interference signals at desired SNRs
     interference_signals, interferer_snr = generate_interference_signals(
@@ -49,6 +51,7 @@ def generate_random_config_for_static_source(base_config):
     )
 
     return {
+        "n_sources": n_sources,
         "room_dims": room_dims,
         "source_coordinates": source_coordinates,
         "mic_coordinates": mic_coordinates,
@@ -137,7 +140,10 @@ def generate_random_microphone_signal_degradations(mic_config):
     return mic_delays, sampling_rate_offsets, mic_gains
 
 
-def _generate_random_source_signals(base_config, mic_delays):
+def _generate_random_source_signals(n_sources, base_config, mic_delays):
+    if n_sources == 0:
+        return []
+
     # Make signal's duration bigger to trim silent beginning
     if mic_delays == 0: # No async delay is simulated
         max_delay = 0
@@ -148,13 +154,13 @@ def _generate_random_source_signals(base_config, mic_delays):
 
     source_signals = []
 
-    for i in range(base_config["sources"]["n_sources"]):
+    for i in range(n_sources):
         if "speech_samples" in base_config["sources"]:
             source_signal = generate_random_speech_signal(
                 total_duration, sr, base_config["sources"]["speech_samples"])
         else:
             source_signal, gain = generate_random_signal(int(sr*total_duration))
-
+            source_signal= source_signal
         source_signals.append(source_signal)
     
     source_signals = np.stack(source_signals)    

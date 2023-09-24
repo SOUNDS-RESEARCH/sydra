@@ -1,3 +1,5 @@
+import numpy as np
+
 from pyroomacoustics import Material
 
 from ..random.surface_absorptions import SURFACE_NAMES, SURFACE_ABSORPTIONS
@@ -25,6 +27,13 @@ def pyroomacoustics_simulator(config):
     Returns:
         numpy.array: matrix containing one microphone signal per row
     """
+
+    n_devices = len(config["mic_coordinates"])
+    n_mics_per_device = len(config["mic_coordinates"][0])
+    duration = config["signal_duration_in_seconds"]*config["sr"]
+    # If there are no sources, return a random signal
+    if len(config["source_signals"]) == 0:
+        return np.random.randn(n_devices, n_mics_per_device, duration)*0.0001
 
     sr = float(config["sr"])
 
@@ -64,9 +73,7 @@ def pyroomacoustics_simulator(config):
 
     signals = simulate(room, snr=snr_in_db)
     n_signals, n_signal = signals.shape
-    n_devices = len(config["mic_coordinates"])
-    signals_per_device = n_signals//n_devices
-    signals = signals.reshape((n_devices, signals_per_device, n_signal))
+    signals = signals.reshape((n_devices, n_mics_per_device, n_signal))
 
     return signals
 
